@@ -1,0 +1,17 @@
+{
+  "name": "hud",
+  "version": "1.0.0",
+  "description": "Home Universe control Daemon",
+  "main": "daemon.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "IoT",
+    "Domotics",
+    "Home",
+    "automation"
+  ],
+  "author": "Adrian Gesto",
+  "license": "Apache-2.0"
+}
