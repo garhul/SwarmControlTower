@@ -32,6 +32,6 @@ payload[4] = parseInt(process.argv[5]); //G Channel
 payload[5] = parseInt(process.argv[6]); //B Channel
 
 console.log(payload);
-server.send(new Buffer(payload), 0, 6, 5000, "192.168.1.134", function(err) {
+server.send(new Buffer(payload), 0, 6, 5000, "living.local", function(err) {
   server.close();
 });
