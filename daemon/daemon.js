@@ -1,48 +1,41 @@
 var config  = require("./config/config");
 var ipc = require('node-ipc');
-console.log(config.db.file);
-var db = new (require('lokijs'))(config.db.file);
-//dispatcher is not required yet
+var fs = require('fs');
 
-//initialize collections
-if (!db.getCollection('devices'))
-  db.addCollection('devices');
+// bootstrap by parsing all device descriptors into memory
+var devices = {};
+var filenames = fs.readdirSync(config.paths.devices);
+
+try {
+  filenames.forEach( function(filename) {
+    var descriptor = JSON.parse(fs.readFileSync(config.paths.devices + filename, 'utf8'))
+    console.info ("reading file: " + filename);
+    console.dir(descriptor);
+    devices[descriptor['human-name']] = descriptor;
+  });
+} catch (e) {
+  console.error("unexpected error processing device descritpors:", e.message);
+}
+
+// TODO: check for groups file
 
 //load some controllers
-var devices = require('./app/controllers/devices')(config,db);
+var deviceController = require('./app/controllers/devices')(config, devices);
+// var groupsController = require('./')
 
 ipc.config = config.ipc;
-
-//set ipc dispatchers
 ipc.serve(config.ipc.path, function() {
 
-  // ipc.server.on('message', function(data, socket) {
-  //
-  //   console.log("got some data ", data);
-  //
-  //   dispatcher.dispatch(data);
-  //
-  //   ipc.server.emit(socket, 'message', "hey como va? " + data);
-  //
-  // });
-
-  ipc.server.on('device.add', function(data, socket) {
-    //add device to db
-    devices.add(data);
-    //respond with what happened
-    ipc.server.emit(socket,'message',"ok");
-  });
-
-  ipc.server.on('device.info', function(data, socket){
-    ipc.server.emit(socket, 'device.info', devices.info(data.device_id));
-  });
-
+  //handle standard events
   ipc.server.on('socket.disconnected',
     function(socket, destroyedSocketId) {
-      console.log('destroyed some socket:' + destroyedSocketId);
-    });
+      console.log('Socket disconnected:' + socket);
+  });
+
+  //bind device methos
+  deviceController.bind(ipc.server);
 });
 
-//start daemon
+//start ipc server
 console.info("Starting device manager on socket " + config.ipc.path);
 ipc.server.start();

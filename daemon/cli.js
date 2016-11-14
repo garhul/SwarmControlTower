@@ -1,85 +1,77 @@
 var config = require('./config/config');
 var ipc = require('node-ipc');
 var argv = require('minimist')(process.argv.slice(2));
+
+config.ipc.silent = true;
 ipc.config = config.ipc;
 
-
+//TODO:: validate argv input
 function validate() {
 
 }
 
-
 function getEvent() {
+  if ('add-device' in argv) {
+    return 'device.add';
+  }
 
+  if ('list-device' in argv) {
+    return 'device.list';
+  }
+
+  if ('remove-device' in argv) {
+    return 'device.remove';
+  }
 }
 
-//parse command line to perform an ipc / udp request
-/*------------------- General --------------------------*/
+function getPayload() {
+  var payload = {};
+  console.dir(argv);
 
+  if ("add-device" in argv) {
+    payload.name = argv['add-device'];
+    payload.descriptor_path = argv._[0];
 
-//currently under test:
-console.dir(argv);
+    console.dir(payload);
+    return payload;
+  }
 
-// processRequest("hola che");
-
-
-
-
-/*------------------- DEVICES -------------------------*/
-
-//list all
-
-//describe
-
-//add
-if (argv.['add-device']) {
-  var device_name = argv.['add-device'];
-  var device_descriptor = argv['-d'];
+  return null;
 
 }
-//remove
-
-//add device to group
-
-//remove device from group
-
-
-/*---------------------- GROUPS -----------------------*/
-
-//list
-
-//describe
-
-//add
-
-//remove
-
-
-
-
 
 console.info("Opening connection to ipc server...");
 ipc.connectTo( 'manager', config.ipc.path, function() {
-    ipc.of.manager.on( 'connect',
-      function() {
-        console.info("Connection stablished \n");
-        ipc.of.manager.emit(getEvent(),getPayload());
-        ipc.disconnect('manager');
-      }
-    );
+  var ev = getEvent();
 
-    ipc.of.manager.on(
-      'disconnect',
-      function(){
-        ipc.log('disconnected from world'.notice);
-      }
-    );
+  ipc.of.manager.on( 'connect',
+    function() {
+      var ev = getEvent();
+      var payload = getPayload();
 
-    ipc.of.manager.on(
-      'message',  //any event or message type your server listens for
-      function(data){
-        ipc.log('got a message from world : '.debug, data);
-      }
-    );
-  }
-);
+      console.info("Connection stablished \n");
+      console.info(ev,payload);
+
+      ipc.of.manager.on(ev, function(data){
+        console.dir(data, {colors:true});
+        // console.dir(data);
+      });
+
+      ipc.of.manager.emit(ev, payload);
+    }
+  );
+
+  ipc.of.manager.on(
+    'disconnect',
+    function(){
+      ipc.log('disconnected from device manager'.notice);
+    }
+  );
+
+  ipc.of.manager.on(
+    'message',  //any event or message type your server listens for
+    function(data){
+      ipc.log('got a message from device manager : '.debug, data);
+    }
+  );
+});

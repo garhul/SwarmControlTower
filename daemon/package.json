@@ -1,17 +1,21 @@
 {
-  "name": "hud",
+  "name": "hudm",
   "version": "1.0.0",
-  "description": "Home Universe control Daemon",
+  "description": "homeUniverse devices manager",
   "main": "daemon.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "node daemon"
   },
   "keywords": [
-    "IoT",
-    "Domotics",
-    "Home",
+    "iot",
+    "domotics",
+    "home",
     "automation"
   ],
   "author": "Adrian Gesto",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "node-ipc": "^8.9.2"
+  }
 }

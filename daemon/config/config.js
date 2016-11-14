@@ -1,6 +1,6 @@
 'use strict';
 
-var defaults = {
+module.exports = {
   ipc: {
     path:"/tmp/iot-manager-daemon",
     networkHost     : 'localhost', //should resolve to 127.0.0.1 or ::1 see the table below related to this
@@ -8,7 +8,7 @@ var defaults = {
     encoding        : 'utf8',
     rawBuffer       : false, //json comm for the moment
     sync            : true,
-    silent          : false, //we want logs
+    silent          : true, //we want logs
     logInColor      : true, //we want fancy logs
     logDepth        : 5,  //
     maxConnections  : 100, // max unix sockets to use
@@ -18,30 +18,10 @@ var defaults = {
   },
   db: {
     file: "data/db.json"
+  },
+  paths: {
+    devices: "devices/",
+    enabledDevices: "devices-enabled/",
+    drivers: "drivers"
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-//
-// var config = {
-//   ipc: {
-//     port: "./socket"
-//   },
-//
-//   devices_path: __dirname + "../devices_enabled/",
-//
-// }
-
-//just for now
-var config = defaults;
-
-module.exports = config;

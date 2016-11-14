@@ -1,4 +1,4 @@
-
+//Todo: standarize
 function driverBase() {
 
 
@@ -7,7 +7,7 @@ function driverBase() {
   function write() {}
 
   function _sendData() {}
-  
+
 
 
 
