@@ -22,6 +22,10 @@ function getEvent() {
   if ('remove-device' in argv) {
     return 'device.remove';
   }
+
+  if ('send' in argv) {
+    return 'device.send';
+  }
 }
 
 function getPayload() {
@@ -32,7 +36,13 @@ function getPayload() {
     payload.name = argv['add-device'];
     payload.descriptor_path = argv._[0];
 
-    console.dir(payload);
+    return payload;
+  }
+
+  if ("send" in argv) {
+    payload.name = argv['send'];
+    payload.cmd = "setRGBRange";
+    payload.data = {start:0,end:5,color:"#ff6600"};
     return payload;
   }
 

@@ -21,11 +21,19 @@ module.exports = function (config, devices) {
             server.emit(socket, ev, _self.add(data.name, data.descriptor));
           } else if (ev.indexOf("list") != -1) {
             server.emit(socket, ev, devices);
-          } else if (ev.indexOf("info")) {
+          } else if (ev.indexOf("info") != -1) {
             console.dir(data);
             server.emit(socket, ev, _self.info(data.name))
-          } else if (ev.indexOf("send")) {
-            server.emit(socket, ev, _self.send(data.name, data.payload))
+          } else if (ev.indexOf("send") != -1) {
+            _self.send(data, function(err, response){
+              if (err) {
+                console.error(err.message);
+                server.emit(socket, ev, { error:true, message:err.message });
+                return;
+              }
+              //driver *must* always provides an answer
+              server.emit(socket,ev, response);
+            });
           }
         });
       });
@@ -63,6 +71,12 @@ module.exports = function (config, devices) {
 
     },
     /**
+    * broadcast message to all devices and request device status report
+    **/
+    report: function() {
+
+    },
+    /**
     * removes a device from the "enabled list"
     */
     remove: function(name) {
@@ -83,15 +97,22 @@ module.exports = function (config, devices) {
     /**
     * sends command to device
     */
-    send: function(name, payload) {
-      if (!name in devices) {
-        console.error(`DEVICE [${name}] NOT FOUND`);
-        return {error: true, message: "DEVICE NOT FOUND"};
+    send: function(data, cb) {
+      if (!(data.name in devices)) {
+        console.error(`DEVICE [${data.name}] NOT FOUND`);
+        cb (new Error("DEVICE NOT FOUND"), null);
+        return;
       }
 
-      var driver = require(config.paths.drivers + devices[name].driver)(devices[name]);
-      //execute command
-      driver.[payload.cmd,payload.];
+      try {
+        var driver = require(config.paths.drivers + devices[data.name].driver)(devices[data.name]);
+        driver.exec(data.cmd, data.data, cb); //mala idea pasar el cb
+
+
+      } catch (e) {
+        console.error(e.message ,e);
+        cb(new Error("Unable to load driver"));
+      }
     }
   }
 };

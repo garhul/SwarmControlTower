@@ -1,16 +1,5 @@
 //Todo: standarize
 function driverBase() {
-
-
-  function read() {}
-
-  function write() {}
-
-  function _sendData() {}
-
-
-
-
+  function exec(data, callback);
 }
-
 module.exports = driverBase;

@@ -20,8 +20,8 @@ module.exports = {
     file: "data/db.json"
   },
   paths: {
-    devices: "devices/",
-    enabledDevices: "devices-enabled/",
-    drivers: "drivers"
+    devices: __dirname + "/../devices/",
+    enabledDevices: __dirname + "/../devices-enabled/",
+    drivers: __dirname + "/../drivers/"
   }
 }
