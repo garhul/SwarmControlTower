@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+  <base href="/">
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Swarm Control Tower</title>
+  <!-- TODO:: add custom css -->
+  <link rel="stylesheet" href="/css/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/vendor/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+</head>
+<body ng-app="SwarmCT">
+  <div ng-include src="'/js/partials/header.html'"></div>
+  <div ng-view></div>
+  <!-- <div ng-include src="'partials/footer.html'"></div> -->
+
+  <script src="/js/vendor/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="/js/vendor/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/js/vendor/bower_components/angular/angular.min.js"></script>
+  <script src="/js/vendor/bower_components/angular-route/angular-route.js"></script>
+  <script src="/js/vendor/bower_components/angular-resource/angular-resource.min.js"></script>
+
+  <!-- <script src="/js/lib/satellizer.js"></script> not in use at the moment -->
+  <script src="/js/application.js"> </script>
+
+  <!--- include resources -->
+  <script src="/js/resources/groups.js"></script>
+  <!--- include controllers -->
+  <script src="/js/controllers/dashboard.js"></script>
+  <script src="/js/controllers/group.js"></script>
+  <script src="/js/controllers/menu.js"></script>
+</body>
+</html>
