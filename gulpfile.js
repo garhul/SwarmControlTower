@@ -9,7 +9,6 @@ var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var plumber = require('gulp-plumber');
 
-
 gulp.task('angular', function() {
   return gulp.src([
     'app/app.js',
@@ -30,7 +29,7 @@ gulp.task('templates', function() {
 });
 
 gulp.task('vendor', function() {
-  return gulp.src('app/vendor/*.js')
+  return gulp.src('app/vendor/**/*.js')
     .pipe(gulpif(argv.production, uglify()))
     .pipe(gulp.dest('public/js/lib'));
 });
@@ -42,3 +41,22 @@ gulp.task('watch', function() {
 
 gulp.task('build', ['angular', 'vendor', 'templates']);
 gulp.task('default', ['build', 'watch']);
+
+gulp.task('dev', function(){
+    return gulp.src([
+      'app/**/*'
+    ]).pipe(gulp.dest('public/js'));
+});
+
+gulp.task('clean', function(){
+  return del([
+    './public/js',
+  ], {
+    force: true
+  });
+});
+
+gulp.task('local',function(){
+  gulp.watch('app/**/*.html', ['dev']);
+  gulp.watch('app/**/*.js', ['dev']);
+})

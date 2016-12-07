@@ -5,14 +5,8 @@ var compression = require('compression');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
-var dotenv = require('dotenv');
 
-// Load environment variables from .env file
-dotenv.load();
-
-// Controllers
-var contactController = require('./controllers/contact');
-
+var routes = require('./routes/routes');
 var app = express();
 
 app.set('port', process.env.PORT || 3000);
@@ -24,7 +18,7 @@ app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.post('/contact', contactController.contactPost);
+app.use('/api',routes);
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'app', 'index.html'));

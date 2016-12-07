@@ -9,10 +9,11 @@ html {
 }
 
 body {
-  background-color: #f4f4f4;;
+  background-color: #202020;
   margin-bottom: 44px;
   line-height: 1.57142857;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color:#999;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -280,4 +281,30 @@ textarea {
   border-radius: 2px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+}
+
+
+/*---------------------------------*/
+
+.device-min {
+  border-left:.25em solid #442255;
+  background-color:#1A1A1A;
+  margin-top:2em;
+  padding:1em;
+  border-radius:.5em;
+  font-size:1.2em;
+}
+
+.device-min:hover {
+  color:#BBB;
+}
+
+.pushable {
+  cursor:pointer;
+  padding:.5em 0em;
+  color:#999;
+}
+
+.pushable:hover {
+  color:#BBB;
 }

@@ -1,6 +1,6 @@
 (function() {
-angular.module('MyApp')
-    .controller('SignupCtrl', SignupCtrl);
+angular.module('SwarmCT')
+    .controller('SettingsCtrl', SignupCtrl);
 
 SignupCtrl.$inject = ['$scope', '$rootScope', '$location', '$window', '$auth'];
 
