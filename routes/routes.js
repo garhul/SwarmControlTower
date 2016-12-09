@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var groups = require('../controllers/groups');
+var devices = require('../controllers/devices');
 
 //set the accept headers for the api routes
  router.use(function(req,res,next){
@@ -23,7 +24,7 @@ router.delete('/groups',
 );
 
 //devices api
-
+router.get('/devices', devices.list);
 
 //settings api
 

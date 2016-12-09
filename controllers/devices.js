@@ -1,14 +1,17 @@
 'use strict';
+var bridge = require("../lib/manager-bridge");
+
 module.exports = {
-
-  get:function(req, res, next){
-
-    var data = new Array();
-    //TODO:: load from groups file, or db or whatever
-    data.push({"name":"living","devices":[{'id':'BF93','name':'Mesa'}]});
-    data.push({"name":"estudio","devices":[{'id':'BF94','name':'Lampara 1'},{'id':'BF91','name':'Lampara 2'}]});
-
-    res.send(data);
+  list:function(req, res, next) {
+    bridge.getDevices().then(
+      function(response){
+        console.log("returned from daemon:" + response);
+        res.send(response);
+      },
+      function(err) {
+        console.error(err);
+        res.status(500).send(data);
+      });
   },
 
   remove:function(req, res){
