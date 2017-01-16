@@ -14,6 +14,9 @@ results
 tmp
 coverage
 
+#distributables
+dist
+
 # API keys
 .env
 

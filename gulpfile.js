@@ -17,14 +17,17 @@ const DIST_PATH = "./dist";
 
 // dev environment build:
 gulp.task('dev', function() {
-    //copy js to distributable dir
-    gulp.src(['app/public/']).pipe(gulp.dest(DIST_PATH));
+    //copy js & html to distributable dir
+    gulp.src([
+      'app/public/**/*.js',
+      'app/public/**/*.html',
+      'app/public/**/*.html'])
+      .pipe(gulp.dest(DIST_PATH));
     //compile css and move it to distributable dir
-    gulp.src(['app/public/styles/*.sass']);
-    //copy html to distributable dir
-    gulp.src['app/']
-    //copy assets to distributable dir
-    gulp.src
+    gulp.src('./app/public/styles/*.scss')
+      .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+      .pipe(gulp.dest(DIST_PATH));
+
 });
 
 gulp.task('local',function(){
