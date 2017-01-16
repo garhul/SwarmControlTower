@@ -31,7 +31,7 @@ module.exports = function (config, devices) {
                 server.emit(socket, ev, { error:true, message:err.message });
                 return;
               }
-              //driver *must* always provides an answer
+              //driver *must* always provide an answer
               server.emit(socket,ev, response);
             });
           }

@@ -1,25 +1,37 @@
-(function() {
-angular.module('MyApp')
-    .controller('ContactCtrl', ContactCtrl);
 
-ContactCtrl.$inject = ['$scope', 'Contact'];
+/**
+ * GET /contact
+ */
+exports.contactGet = function(req, res) {
+  res.render('contact', {
+    title: 'Contact'
+  });
+};
 
-function ContactCtrl($scope, Contact) {
-    var ctrl = this;
-    ctrl.sendContactForm = sendContactForm;
+/**
+ * POST /contact
+ */
+exports.contactPost = function(req, res) {
+  req.assert('name', 'Name cannot be blank').notEmpty();
+  req.assert('email', 'Email is not valid').isEmail();
+  req.assert('email', 'Email cannot be blank').notEmpty();
+  req.assert('message', 'Message cannot be blank').notEmpty();
+  req.sanitize('email').normalizeEmail({ remove_dots: false });
 
-    function sendContactForm() {
-        Contact.send($scope.contact)
-            .then(function(response) {
-                $scope.messages = {
-                    success: [response.data]
-                };
-            })
-            .catch(function(response) {
-                $scope.messages = {
-                    error: Array.isArray(response.data) ? response.data : [response.data]
-                };
-            });
-    }
-}
-})();
+  var errors = req.validationErrors();
+
+  if (errors) {
+    return res.status(400).send(errors);
+  }
+
+  var mailOptions = {
+    from: req.body.name + ' ' + '<'+ req.body.email + '>',
+    to: 'your@email.com',
+    subject: '✔ Contact Form | Mega Boilerplate',
+    text: req.body.message
+  };
+
+  transporter.sendMail(mailOptions, function(err) {
+    res.send({ msg: 'Thank you! Your feedback has been submitted.' });
+  });
+};

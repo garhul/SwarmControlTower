@@ -21,5 +21,8 @@ angular.module('SwarmCT').controller('DashboardCtrl', function($scope, $injector
     $location.path('/groups/'+name);
   }
 
+  $scope.teststuff = function() {
+    console.log($scope.test);
+  }
   init();
 });

@@ -1,3 +1,5 @@
+//TODO:: fix gulp file
+
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var argv = require('yargs').argv;
@@ -8,10 +10,35 @@ var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var plumber = require('gulp-plumber');
+var sass = require('gulp-sass');
+
+const DIST_PATH = "./dist";
+
+
+// dev environment build:
+gulp.task('dev', function() {
+    //copy js to distributable dir
+    gulp.src(['app/public/']).pipe(gulp.dest(DIST_PATH));
+    //compile css and move it to distributable dir
+    gulp.src(['app/public/styles/*.sass']);
+    //copy html to distributable dir
+    gulp.src['app/']
+    //copy assets to distributable dir
+    gulp.src
+});
+
+gulp.task('local',function(){
+  gulp.watch('app/**/*.html', ['dev']);
+  gulp.watch('app/**/*.js', ['dev']);
+  gulp.watch('app/**/*.css', ['dev']);
+})
+
+
+// producton build :: todo-> implement it
 
 gulp.task('angular', function() {
   return gulp.src([
-    'app/app.js',
+    'app/application.js',
     'app/controllers/*.js',
     'app/services/*.js'
   ])
@@ -40,23 +67,9 @@ gulp.task('watch', function() {
 });
 
 gulp.task('build', ['angular', 'vendor', 'templates']);
-gulp.task('default', ['build', 'watch']);
-
-gulp.task('dev', function(){
-    return gulp.src([
-      'app/**/*'
-    ]).pipe(gulp.dest('public/js'));
-});
 
 gulp.task('clean', function(){
-  return del([
-    './public/js',
-  ], {
+  return del([distPath], {
     force: true
   });
 });
-
-gulp.task('local',function(){
-  gulp.watch('app/**/*.html', ['dev']);
-  gulp.watch('app/**/*.js', ['dev']);
-})
