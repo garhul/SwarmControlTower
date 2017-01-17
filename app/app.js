@@ -16,12 +16,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, '../dist')));
 
 app.use('/api',routes);
 
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, '../dist/views/', 'index.html'));
 });
 
 app.get('*', function(req, res) {
@@ -37,7 +37,7 @@ if (app.get('env') === 'production') {
 }
 
 app.listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + app.get('port'));
+  console.log('SCT listening on ' + app.get('port'));
 });
 
 module.exports = app;

@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "description": "IoT centralized device manager and control",
   "repository": "https://github.com/garhul/SwarmControlTower",
-  "scripts": {
+  "scripts": {        
     "build": "gulp build",
     "build:production": "gulp build --production",
     "postinstall": "npm run build:production",
@@ -35,6 +35,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "gulp-clean": "^0.3.2",
+    "gulp-html-replace": "^1.6.2",
     "gulp-sass": "^3.1.0",
     "mocha": "^2.4.5",
     "phantomjs-prebuilt": "^2.1.7",

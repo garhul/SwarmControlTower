@@ -12,6 +12,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var plumber = require('gulp-plumber');
 var sass = require('gulp-sass');
 var clean = require('gulp-clean');
+var htmlreplace = require('gulp-html-replace');
 
 const DIST_PATH = "dist/";
 const DIST_JS = DIST_PATH + 'js/';
@@ -22,8 +23,15 @@ const DIST_ASSETS = DIST_PATH + 'assets/';
 
 
 
+// TODO:: implement along with production build
+// gulp.task('replace', () => {
+//   gulp.src(DIST_VIEWS + 'index.html')
+//     .pipe(htmlreplace({'css': 'styles.min.css','js': 'js/bundle.min.js'}))
+//
+//     .pipe(gulp.dest(''));
+// });
 
-// dev environment build:
+
 gulp.task('dev.js', ()  => {
   return gulp.src('app/public/js/**/*.js').pipe(gulp.dest(DIST_JS));
 });
@@ -45,11 +53,16 @@ gulp.task('dev.assets', ()  => {
   return gulp.src('app/public/assets/**/*.*').pipe(gulp.dest(DIST_ASSETS));
 });
 
+//copy vendor libs
+gulp.task('dev.vendor', ()  => {
+  return gulp.src('app/public/vendor/**/*.*').pipe(gulp.dest(DIST_VENDOR));
+});
+
 if (argv.production) {
   console.info ("BUILDING PRODUCTION DISTRIBUTABLE");
   console.warn ("PRODUCTION BUIILD NOT DEFINED YET");
 } else {
-  gulp.task('build',['dev.js','dev.styles','dev.views','dev.assets']);
+  gulp.task('build',['dev.js','dev.styles','dev.views','dev.assets','dev.vendor']);
 }
 
 gulp.task('watch',function(){

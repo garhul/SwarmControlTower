@@ -1,0 +1,17 @@
+{
+  "name": "Swarm Control Tower",
+  "description": "IoT centralized device manager and control",
+  "main": "",
+  "authors": [
+    "garhul <adrian.gesto@gmail.com>"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/garhul/SwarmControlTower",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "angular": "^1.6.1",
+    "jquery": "^3.1.1",
+    "angular-resource": "^1.6.1",
+    "angular-route": "^1.6.1"
+  }
+}

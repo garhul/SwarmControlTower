@@ -17,6 +17,9 @@ coverage
 #distributables
 dist
 
+#vendor libs
+app/public/vendor/
+
 # API keys
 .env
 

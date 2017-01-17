@@ -5,9 +5,12 @@ console.log("setting the ready staste");
 //TODO:: move this to a cfg file (nconf to be implemented)
 var config =  {
   ipc: {
-    path:"/tmp/iot-manager-daemon"
+    path:"/tmp/iot-manager-daemon",
+    maxRetries: 3
   }
 };
+
+ipc.config = config.ipc;
 
 ipc.connectTo('manager', config.ipc.path, function() {
   ipc.of.manager.on('connect', function() {
