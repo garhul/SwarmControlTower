@@ -24,9 +24,12 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../dist/views/', 'index.html'));
 });
 
-app.get('*', function(req, res) {
-  res.redirect('/#' + req.originalUrl);
-});
+
+
+// app.get('*', function(req, res) {
+//   console.log("wha");
+//   res.redirect('/#' + req.originalUrl);
+// });
 
 // Production error handler
 if (app.get('env') === 'production') {

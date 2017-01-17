@@ -8,25 +8,31 @@
   <title>Swarm Control Tower</title>
   <!-- TODO:: add custom css -->
 
+  <!-- build:css -->
+  <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="vendor/font-awesome-4.7.0/css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+
+
+
+
+</head>
+<body ng-app="SwarmCT">
+  <div ng-include src="'vendor/views/partials/header.html'"></div>
+  <div ng-view></div>
+  <!-- d<div ng-include src="'partials/footer.html'"></div> -->
+
   <!-- build:vendors -->
+
   <script src="vendor/jquery/dist/jquery.min.js"></script>
   <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="vendor/angular/angular.min.js"></script>
   <script src="vendor/angular-route/angular-route.js"></script>
   <script src="vendor/angular-resource/angular-resource.min.js"></script>
-  <!-- endbuild -->
 
-  <!-- build:css -->
-  <link rel="stylesheet" href="/css/vendor/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/vendor/font-awesome-4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="dist/css/main.css">
-  <!-- endbuild -->
 
-</head>
-<body ng-app="SwarmCT">
-  <div ng-include src="'/js/partials/header.html'"></div>
-  <div ng-view></div>
-  <!-- d<div ng-include src="'partials/footer.html'"></div> -->
+  <!-- endbuild -->
 
   <!-- build:js-->
   <script src="/js/application.js"> </script>

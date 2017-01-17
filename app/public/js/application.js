@@ -5,23 +5,24 @@ angular.module('SwarmCT', ['ngRoute','ngResource'])
 
     $routeProvider
       .when('/', {
-        templateUrl: '/js/partials/dashboard.html',
+        templateUrl: 'views/partials/dashboard.html',
         controller: 'DashboardCtrl'
       })
       .when('/groups/:name', {
-        templateUrl: '/js/partials/group.html',
+        templateUrl: 'views/partials/group.html',
         controller:'GroupCtrl'
+      })
+      .when('/device', {
+        templateUrl: 'views/partials/devices.html',
+        controller: 'devicesCtrl'
+      })
+      .when('/settings', {
+        templateUrl: 'views/partials/settings.html',
+        controller: 'SettingsCtrl',
+      })
+      .otherwise({
+         redirectTo:'/404.html'
+         templateUrl: '/js/partials/404.html'
       });
-      // .when('/device', {
-      //   templateUrl: 'partials/devices.html',
-      //   controller: 'devicesCtrl'
-      // })
-      // .when('/settings', {
-      //   templateUrl: 'partials/settings.html',
-      //   controller: 'SettingsCtrl',
-      // })
-      // .otherwise({
-      //   templateUrl: '/js/partials/404.html'
-      // });
   })
 })();
