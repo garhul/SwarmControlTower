@@ -39,7 +39,8 @@ gulp.task('dev.js', ()  => {
 //compile css and move it to distributable dir
 gulp.task('dev.styles', ()  => {
   return gulp.src('./app/public/styles/*.scss')
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(sass({outputStyle: 'nested'}).on('error', sass.logError))
+    .pipe(concat('main.css'))
     .pipe(gulp.dest(DIST_STYLES));
 });
 
@@ -68,7 +69,7 @@ if (argv.production) {
 gulp.task('watch',function(){
   gulp.watch('app/public/views/**/*.html', ['dev.views']);
   gulp.watch('app/public/js/**/*.js', ['dev.js']);
-  gulp.watch('app/public/styles/**/*.scss', ['dev.styles']);
+  gulp.watch('app/public/styles/*.scss', ['dev.styles']);
   gulp.watch('app/public/assets/**/*.*', ['dev.assets']);
   gulp.watch('app/public/vendor/**/*.*', ['dev.vendor']);
 })
