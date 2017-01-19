@@ -1,0 +1,7 @@
+{
+  "bridge": {
+    "port":"",
+    "retries":3,
+    "log": true
+  }
+}

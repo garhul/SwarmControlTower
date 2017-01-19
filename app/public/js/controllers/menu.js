@@ -7,6 +7,7 @@ angular.module('SwarmCT')
       ctrl.logout = logout;
 
       function isActive(viewLocation) {
+          console.log($location.path);
           return viewLocation === $location.path();
       }
 

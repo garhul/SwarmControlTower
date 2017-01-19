@@ -12,17 +12,17 @@ angular.module('SwarmCT', ['ngRoute','ngResource'])
         templateUrl: 'views/partials/group.html',
         controller:'GroupCtrl'
       })
-      .when('/device', {
+      .when('/devices', {
         templateUrl: 'views/partials/devices.html',
-        controller: 'devicesCtrl'
+        controller: 'DevicesCtrl'
       })
       .when('/settings', {
         templateUrl: 'views/partials/settings.html',
         controller: 'SettingsCtrl',
       })
-      .otherwise({
-         redirectTo:'/404.html'
-         templateUrl: '/js/partials/404.html'
-      });
+      // .otherwise({
+      //    redirectTo:'/404.html',
+      //    templateUrl: '/js/partials/404.html'
+      // });
   })
 })();

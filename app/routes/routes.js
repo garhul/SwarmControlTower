@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 var groups = require('../controllers/groups');
 var devices = require('../controllers/devices');
+var bridge = require('../controllers/bridge');
 
 //set the accept headers for the api routes
  router.use(function(req,res,next){
@@ -22,6 +23,9 @@ router.put('/groups',
 router.delete('/groups',
   groups.remove
 );
+
+//bridge api
+router.get('/bridge', bridge.status);
 
 //devices api
 router.get('/devices', devices.list);

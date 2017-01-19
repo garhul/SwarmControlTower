@@ -10,7 +10,7 @@
 
   <!-- build:css -->
   <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
-  <!-- <link rel="stylesheet" href="vendor/font-awesome-4.7.0/css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="styles/main.css">
   <!-- endbuild -->
 
@@ -19,9 +19,9 @@
 
 </head>
 <body ng-app="SwarmCT">
-  <div ng-include src="'vendor/views/partials/header.html'"></div>
+  <div ng-include src="'views/partials/header.html'"></div>
   <div ng-view></div>
-  <!-- d<div ng-include src="'partials/footer.html'"></div> -->
+  <!-- <div ng-include src="'partials/footer.html'"></div> -->
 
   <!-- build:vendors -->
 
@@ -40,6 +40,7 @@
   <script src="/js/resources/groups.js"></script>
   <!--- include controllers -->
   <script src="/js/controllers/dashboard.js"></script>
+  <script src="/js/controllers/devices.js"></script>
   <script src="/js/controllers/group.js"></script>
   <script src="/js/controllers/menu.js"></script>
   <!-- endbuild -->
