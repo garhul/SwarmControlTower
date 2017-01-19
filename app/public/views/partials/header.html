@@ -16,6 +16,9 @@
         <li ng-class="{ active: isActive('/groups')}"><a href="/">Groups</a></li>
         <li ng-class="{ active: isActive('/')}"><a href="/">Home</a></li>
         <li ng-class="{ active: isActive('/contact')}"><a href="/settings">Settings</a></li>
+        <li ng-class="pull-right"  ng-show="!isBridgeConnected">
+          <span class="text-warning" title="Device manager not responding"><i class="fa fa-2x fa-exclamation-triangle"></i></span>
+        </li>
       </ul>
     </div>
   </div>

@@ -19,10 +19,26 @@ angular.module('SwarmCT', ['ngRoute','ngResource'])
       .when('/settings', {
         templateUrl: 'views/partials/settings.html',
         controller: 'SettingsCtrl',
-      })
+      });
       // .otherwise({
       //    redirectTo:'/404.html',
       //    templateUrl: '/js/partials/404.html'
       // });
   })
+  .run(function($rootScope, $timeout, Bridge) {
+    //check bridge status
+    var checkBridge = function() {
+      Bridge.status((res) => {
+        $rootScope.isBridgeConnected = res.connected;
+        $timeout(checkBridge, 10000);
+      },
+        (err) => {
+          console.log(err);
+          $timeout(checkBridge, 10000);
+        });
+      }
+    checkBridge();
+
+  });
+
 })();
