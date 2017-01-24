@@ -17,16 +17,25 @@ angular.module('SwarmCT').controller('DevicesCtrl', function($scope, $injector,$
     $location.path('/devices/' + deviceId);
   }
 
+  $scope.delete = (id) => {
+    // TODO:: make it fancy
+    if (confirm("delete it really?")) {
+      Devices.remove({"id":id}).$promise.then((rsp)=>{
+        console.info(rsp.data);
+      },(err)=>{
+        console.warn(err);
+      });
+    }
+  }
+
   function loadDevices() {
-    Devices.list().$promise.then((data) => {
-      $scope.devices.data = data;
-      console.log($scope.devices.data );
+    Devices.list().$promise.then((rsp) => {
+      $scope.devices.data = rsp.data;
     },(err) => {
       //todo:: alert the user about the problem
       console.warn(err);
     });
   }
-
 
   loadDevices();
 });

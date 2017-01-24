@@ -32,7 +32,7 @@ module.exports = (bridge) => {
   //devices api
   router.get('/devices', devicesCtrl.list);
   router.post('/devices', devicesCtrl.add);
-  router.delete('/devices',devicesCtrl.remove);
+  router.delete('/devices/:id',devicesCtrl.remove);
   //settings api
 
   //just in case

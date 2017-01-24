@@ -14,7 +14,7 @@
 
   <div>
     <div class="btn-group" role="group">
-      <button type="button" class="btn btn-default" g-class="{active:viewAs == 'LIST'}" title="list view" ng-click="viewAs ='LIST'"><i class="fa fa-th-list"></i></button>
+      <button type="button" class="btn btn-default" ng-class="{active:viewAs == 'LIST'}" title="list view" ng-click="viewAs ='LIST'"><i class="fa fa-th-list"></i></button>
       <button type="button" class="btn btn-default "ng-class="{active:viewAs == 'ITEM'}" title="item view" ng-click="viewAs ='ITEM'"><i class="fa fa-th-large"></i></button>
     </div>
 
@@ -44,10 +44,16 @@
  </div>
 
  <div class="itemView" ng-show="viewAs == 'ITEM'">
-   <div class="item" ng-repeat="device in devices.data" ng-click="showDevice(device.id)">
+   <div class="item" ng-repeat="device in devices.data" >
+     <div class="pull-right">
+       <div class="btn-group" role="group">
+         <button type="button" class="btn btn-default" title="delete item" ng-click="delete(device.id)">
+           <i class="fa fa-trash"></i>
+         </button>
+       </div>
+     </div>
      <h2>{{device.name}}</h2>
-     <span>{{device.description}}</span>
-
+     <span class="pull-right">{{device.description}}</span>
    </div>
  </div>
 

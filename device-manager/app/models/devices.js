@@ -30,6 +30,9 @@ module.exports = (config) => {
     console.info(`Parsing devices file ${config.paths.deviceStore}`);
     try {
       store = JSON.parse(fs.readFileSync(config.paths.deviceStore, 'utf8'));
+      for (var id in store) {
+        store[id].id = id;
+      }
     } catch (e) {
       console.error("unexpected error processing devices descritpors:", e.message);
     }
@@ -89,6 +92,7 @@ module.exports = (config) => {
 
   /** removes the specified devices from the current store **/
   function remove(ids) {
+    console.log(ids);
     var removedIds = [];
     ids.forEach((v) => {
       try {

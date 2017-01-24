@@ -7,7 +7,6 @@ angular
         url: '/api/groups',
         isArray:true
       },
-
       add: {
         method:  "POST",
         url:  '/api/groups'

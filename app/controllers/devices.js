@@ -5,7 +5,6 @@ module.exports = function devicesCtrl (bridge) {
   function list(req, res, next) {
     bridge.devices.get(null).then(
       function(response){
-        console.dir(response);
         res.send(response);
       },
       function(err) {
@@ -16,12 +15,12 @@ module.exports = function devicesCtrl (bridge) {
 
   /** remove a device descriptor from the devices file **/
   function remove(req, res, next){
-    bridge.devices.remove(req.body).then(
+    bridge.devices.remove([req.params.id]).then(
       (rsp) => {
         res.status(201).send({data:rsp});
       },
       (err) => {
-        console.log(err);
+        console.log("error" + err);
         res.status(500).send({error:true});
       }
     );

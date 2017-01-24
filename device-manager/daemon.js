@@ -52,6 +52,7 @@ ipc.serve(() => {
 
   //remove a device
   ipc.server.on(EV_DEV_REMOVE ,(data, socket) => {
+    console.log(data);
     ipc.server.emit(socket, EV_DEV_REMOVE ,devicesController.remove(data.ids));
   });
 
