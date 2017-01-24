@@ -1,28 +1,32 @@
 'use strict';
 angular.module('SwarmCT').controller('DevicesCtrl', function($scope, $injector,$routeParams){
-  var Groups = $injector.get('Groups');
+  var Devices = $injector.get('Devices');
   var $location = $injector.get('$location');
 
+  $scope.viewAs = 'ITEM';
+  $scope.devices = {};
+  $scope.devices.loading = true;
+  $scope.devices.data = [];
+  $scope.locked = true;
 
   $scope.filterDevices = () => {
     console.log($scope.filter);
   }
 
+  $scope.showDevice = (deviceId) => {
+    $location.path('/devices/' + deviceId);
+  }
 
-
-  var init = function() {
-    $scope.locked = true;
-    //load a group in particular
-    Groups.list(function(res) {
-      res.forEach(function(i) {
-        if(i.name === $routeParams.name) {
-          $scope.group = i;
-        }
-      });
-    }, function(err) {
-      console.error(err);
+  function loadDevices() {
+    Devices.list().$promise.then((data) => {
+      $scope.devices.data = data;
+      console.log($scope.devices.data );
+    },(err) => {
+      //todo:: alert the user about the problem
+      console.warn(err);
     });
   }
 
-  init();
+
+  loadDevices();
 });

@@ -11,25 +11,44 @@
     </div>
 
   </form>
- <table class="table table-hover table-responsive table-condensed">
-   <thead>
-     <td></td>
-     <td>device id</td>
-     <td>device address</td>
-     <td>device status</td>
-     <td>device location</td>
-     <td></td>
-   </thead>
-  <tbody>
-    <tr ng-repeat="device in devices">
-      <td></td>
-      <td>{{device.id}}</td>
-      <td>{{device.addr}}</td>
-      <td>{{device.status}}</td>
-      <td>{{device.location}}</td>
-      <td></td>
-    </tr>
-  </tbody>
- </table>
+
+  <div>
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default" g-class="{active:viewAs == 'LIST'}" title="list view" ng-click="viewAs ='LIST'"><i class="fa fa-th-list"></i></button>
+      <button type="button" class="btn btn-default "ng-class="{active:viewAs == 'ITEM'}" title="item view" ng-click="viewAs ='ITEM'"><i class="fa fa-th-large"></i></button>
+    </div>
+
+  </div>
+
+  <div class="listView" ng-show="viewAs == 'LIST'">
+   <table class="table table-hover table-responsive table-condensed" >
+     <thead>
+       <td></td>
+       <td>device id</td>
+       <td>device address</td>
+       <td>device status</td>
+       <td>device location</td>
+       <td></td>
+     </thead>
+    <tbody>
+      <tr ng-repeat="device in devices.data">
+        <td></td>
+        <td>{{device.name}}</td>
+        <td>{{device.addr}}</td>
+        <td>{{device.status}}</td>
+        <td>{{device.location}}</td>
+        <td></td>
+      </tr>
+    </tbody>
+   </table>
+ </div>
+
+ <div class="itemView" ng-show="viewAs == 'ITEM'">
+   <div class="item" ng-repeat="device in devices.data" ng-click="showDevice(device.id)">
+     <h2>{{device.name}}</h2>
+     <span>{{device.description}}</span>
+
+   </div>
+ </div>
 
 </div>

@@ -1,8 +1,0 @@
-{
-  "driver":"nodemcu-rgb-strip",
-  "version":"0.1",
-  "network-name": "krilin.local",
-  "human-name":"strip.studio",
-  "channels":"16",
-  "port":5000
-}

@@ -1,0 +1,106 @@
+{
+  "E093bcD1": {
+    "device": {
+      "driver": "firefly-rgbstrip",
+      "version": "0.1",
+      "chanels": "64",
+      "address": "192.168.1.245",
+      "networkName": "mesa.local",
+      "port": 5000
+    },
+    "name": "Mesa de cafe",
+    "location": "Living",
+    "description": "mesa con lampara o que se yo"
+  },
+  "E093bcD3": {
+    "device": {
+      "driver": "firefly-dimmbox",
+      "version": "0.1",
+      "chanels": "4",
+      "address": "192.168.1.205",
+      "networkName": "officeLight.local",
+      "port": 5000
+    },
+    "name": "Luces oficina",
+    "location": "Oficina",
+    "description": "Luces dicroicas dimerizables"
+  },
+  "E093EFC7": {
+    "device": {
+      "driver": "firefly-rgbstrip",
+      "version": "0.1",
+      "chanels": "30",
+      "address": "192.168.1.105",
+      "networkName": "sillon.local",
+      "port": 5000
+    },
+    "name": "Luces sillon",
+    "location": "Living",
+    "description": "Luces bañadoras tras sillon"
+  },
+  "E493EFC7": {
+    "device": {
+      "driver": "firefly-datalog",
+      "version": "0.1",
+      "chanels": "3",
+      "address": "192.168.1.115",
+      "networkName": "",
+      "port": 5000
+    },
+    "name": "Sensor temperatura patio",
+    "location": "Patio",
+    "description": "Sensor temperatura de patio"
+  },
+  "2D9C3D": {
+    "device": {
+      "driver": "firefly-lm35",
+      "version": "0.1",
+      "chanels": "4",
+      "address": "192.168.1.205",
+      "networkName": "officetemp.local",
+      "port": 5005
+    },
+    "name": "lm35 en oficina",
+    "location": "Oficina",
+    "description": "Sensor de temperatura"
+  },
+  "5320BC": {
+    "device": {
+      "driver": "firefly-lm35",
+      "version": "0.1",
+      "chanels": "4",
+      "address": "192.168.1.205",
+      "networkName": "officetemp.local",
+      "port": 5005
+    },
+    "name": "lm35 en oficina",
+    "location": "Oficina",
+    "description": "Sensor de temperatura"
+  },
+  "70511A": {
+    "device": {
+      "driver": "firefly-lm35",
+      "version": "0.1",
+      "chanels": "4",
+      "address": "192.168.1.205",
+      "networkName": "officetemp.local",
+      "port": 5005
+    },
+    "name": "lm35 en oficina",
+    "location": "Oficina",
+    "description": ""
+  },
+  "75E11C": {
+    "device": {
+      "driver": "firefly-lm35",
+      "version": "0.1",
+      "chanels": "4",
+      "address": "192.168.1.205",
+      "networkName": "officetemp.local",
+      "port": 5005
+    },
+    "name": "lm35 en oficina",
+    "location": "Oficina",
+    "description": "Awaiting configuration"
+  }
+}

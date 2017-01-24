@@ -5,7 +5,6 @@ var compression = require('compression');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
-var routes = require('./routes/routes');
 var fs = require('fs');
 var app = express();
 
@@ -14,12 +13,12 @@ var settingsFile = (app.get('env') === 'production')? 'prod.josn': 'dev.json';
 var settings = JSON.parse(fs.readFileSync(path.join(__dirname, './config/', settingsFile),'utf8'));
 
 var bridge = require('./lib/manager-bridge')(settings.bridge);
+var routes = require('./routes/routes')(bridge);
 
 app.set('settings', settings);
 app.set('port', process.env.PORT || 3000);
-app.set('bridge', bridge);
 app.use(compression());
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());

@@ -2,7 +2,9 @@
 
 module.exports = {
   ipc: {
-    path:"/tmp/iot-manager-daemon",
+    socketRoot: '/tmp/',
+    appspace: 'sct.',
+    id:'manager',
     networkHost     : 'localhost', //should resolve to 127.0.0.1 or ::1 see the table below related to this
     networkPort     : 8000,
     encoding        : 'utf8',
@@ -20,8 +22,7 @@ module.exports = {
     file: "data/db.json"
   },
   paths: {
-    devices: __dirname + "/../devices/",
-    enabledDevices: __dirname + "/../devices-enabled/",
+    deviceStore: __dirname + "/devices.mock.json",
     drivers: __dirname + "/../drivers/"
   }
 }

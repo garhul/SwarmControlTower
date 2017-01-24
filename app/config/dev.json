@@ -1,7 +1,10 @@
 {
   "bridge": {
+    "socketRoot": "/tmp/",
+    "appspace": "sct.",
     "port":"",
     "retries":3,
-    "log": true
+    "log": true,
+    "silent":true
   }
 }

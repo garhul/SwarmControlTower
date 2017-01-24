@@ -309,3 +309,24 @@ textarea {
 .pushable:hover {
   color:#BBB;
 }
+
+/*---- device item view ----*/
+
+.itemView {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+
+  .item {
+
+    background-color:lighten($foreground, 5%);
+    border:.25em solid lighten($foreground, 10%);
+    margin:.5em;
+    padding:.5em;
+    border-radius:.5em;
+    min-width:30%;
+  }
+
+
+
+}
