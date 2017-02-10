@@ -18,6 +18,9 @@ module.exports = {
     maxRetries      : 5,
     stopRetrying    : 5
   },
+  network: {
+    announce:{port:3001, ip:"225.0.0.1"}
+  },
   db: {
     file: "data/db.json"
   },

@@ -1,6 +1,8 @@
 var config  = require("./config/config");
 var ipc = require('node-ipc');
-var fs = require('fs');
+const fs = require('fs');
+const dgram = require('dgram');
+const sv = dgram.createSocket('udp4');
 
 const EV_DEV_GET = 'devices.get';
 const EV_DEV_ADD = 'devices.add';
@@ -47,17 +49,34 @@ ipc.serve(() => {
     rsp.status = (data === false)? 500: 200;
 
     ipc.server.emit(socket, EV_DEV_ADD ,rsp);
-
   });
 
   //remove a device
   ipc.server.on(EV_DEV_REMOVE ,(data, socket) => {
-    console.log(data);
     ipc.server.emit(socket, EV_DEV_REMOVE ,devicesController.remove(data.ids));
   });
+});
+
+//Handle announce requests
+sv.on('message',(msg, rinfo) => {
+//this should be an id of new device awaking
+  console.log("received announce message");
+  console.log("chip id " + msg);
+
+  //request more info from this announcer
+
+  //update local info about the announcer
+
+  //emit an event for this
 
 
 });
+
+sv.bind (config.network.announce.port, () => {
+  sv.addMembership(config.network.announce.ip);
+});
+
+
 
 //start ipc server
 console.info("Starting device manager");

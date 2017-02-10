@@ -92,7 +92,6 @@ module.exports = (config) => {
 
   /** removes the specified devices from the current store **/
   function remove(ids) {
-    console.log(ids);
     var removedIds = [];
     ids.forEach((v) => {
       try {
