@@ -1,17 +1,37 @@
 
 {
 "E093bcD1": {
-  "device": {
-    "driver":"firefly-rgbstrip",
-    "version":"0.1",
-    "chanels":"64",
-    "address":"192.168.1.245",
-    "networkName":"mesa.local",
-    "port":5000
-    },
-  "name":"Mesa de cafe",
+  "address":"192.168.1.245",
+  "networkName":"mesa.local",
+  "chipId":35184,
+  "lastSeen":null,
   "location":"Living",
-  "description": "mesa con lampara o que se yo"
+  "description": "mesa con lampara o que se yo",
+  "services": [
+    {
+      "driver":"firefly-rgbstrip",
+      "version":"0.1",
+      "channels":64,
+      "port":5000,
+      "enabled":true
+    },
+    {
+      "driver":"firefly-dimmbox",
+      "version":"0.1",
+      "channels":4,
+      "port":5000,
+      "enabled":true
+    },
+    {
+      "driver":"firefly-templog",
+      "version":"0.1",
+      "channels":1,
+      "port":5000,
+      "name":"Sensor de temperatura",
+      "description":"algo",
+      "pull":false,
+      "enabled":true
+    }]
   },
 
   "E093bcD3": {
