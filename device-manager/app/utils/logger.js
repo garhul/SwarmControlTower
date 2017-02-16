@@ -31,7 +31,7 @@ module.exports = (config) => {
   function log(level, text, tag) {
     let output = '';
     if (cfg.timestamp)
-      output = cfg.logString.replace('[TSTAMP]', chalk.yellow(new Date().toISOString()));
+      output = cfg.logString.replace('[TSTAMP]', chalk.gray(new Date().toISOString()));
 
     output = output.replace('[LEVEL]', () => {
       switch(level) {

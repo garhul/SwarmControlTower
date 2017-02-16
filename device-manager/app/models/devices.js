@@ -4,27 +4,49 @@ module.exports = (config) => {
   const fs = require('fs');
   const log = require('../utils/logger')(config);
   const _ = require('underscore');
-
+  const STATUSES = {'NEW':'NEW','ENABLED':'ENABLED','DISABLED':'DISABLED','UNREACHEABLE':'UNREACHEABLE'};
   var Store =  new Object();
 
   /** generates an unique 24 bit hex string as identifier for a device **/
   function _getUniqueId() {
     var id =  Math.random().toString(16).substring(2,8).toUpperCase();
 
-    while (!id in store) {
+    while (!id in Store) {
       id =  Math.random().toString(16).substring(2,8).toUpperCase();
     }
     return id;
   }
 
   function _validate(device) {
+    console.dir(device);
+    //device requires at least an address
+    if (!"address" in device)
+      return false;
 
+    var blocks = device.address.split(".");
+
+    if (blocks.length != 4)
+      return false;
+
+    for (var block in blocks) {
+      if (parseInt(block) > 255 || parseInt(block) < 0)
+        return false
+    }
+
+    return true;
   }
 
   function add(device) {
-    if (!_validate(device)) {
+    if (!_validate(device))
       return false;
-    }
+
+    let id = _getUniqueId();
+    log.i("added new device with id " + id);
+    device.id = id;
+    Store[id] = device;
+
+    return id;
+
   }
 
   /** removes the specified devices from the current store **/
@@ -46,8 +68,13 @@ module.exports = (config) => {
     return {"removed":removedIds};
   }
 
-  function update() {
+  function update(device) {
+    if (!_validate(device))
+      return false;
 
+    Store[device.id] = device;
+
+    return device;
   }
 
   function get(ids) {
@@ -76,15 +103,12 @@ module.exports = (config) => {
     load();
   }
 
-  function find(filter) {
-    console.log(Store);
-    return _.where(filter);
+  function find(filter = {}) {
+    return _.where(Store, filter);
   }
 
-
-  //startup code
+  //startup
   load();
-
 
   return {
     add:add,
@@ -94,7 +118,8 @@ module.exports = (config) => {
     load:load,
     save:save,
     reload:reload,
-    find:find,
+    find:find ,
+    st: STATUSES
   }
 
 }

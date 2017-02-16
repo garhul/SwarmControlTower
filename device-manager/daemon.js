@@ -16,6 +16,7 @@ const EV_DEV_GET = 'devices.get';
 const EV_DEV_ADD = 'devices.add';
 const EV_DEV_REMOVE = 'devices.del';
 const EV_DEV_DISCOVERED = 'devices.discovered';
+const EV_DEV_UPDATED = 'devices.updated';
 
 ipc.config = config.ipc;
 ipc.serve(() => {
@@ -60,9 +61,9 @@ ipc.serve(() => {
 });
 
 //Handle announce requests
-sv.on('message',(msg, rinfo) => {
+sv.on('message',(cid, rinfo) => {
   //this should be an id of new device awaking
-  log.i(`New announce message from ${rinfo.address}, chip id: ${msg}`, 'ANNOUNCE');
+  log.i(`New announce message from ${rinfo.address}, chip id: ${cid}`, 'ANNOUNCE');
 
   //request more info from this announcer
   var req = http.request(
@@ -73,22 +74,39 @@ sv.on('message',(msg, rinfo) => {
     (res) => {
       res.setEncoding('utf8');
       res.on('data', (buff) => {
-        console.log('buff' + buff);
 
         //update local info about the announcer
-        if (Store.find({'chipId':msg}) != -1 ) {
-          //Store.add();
-        } else {
-          //Store.update();
-        }
+        let matches = Store.find({'chipId': cid.toString()});
+        if (matches.length === 0 ) {
 
-        //emit an event for this
-        ipc.server.emit(EV_DEV_DISCOVERED, {});
+          let device  = {};
+          device.address = rinfo.address;
+          device.services = JSON.parse(buff);
+          device.chipId = cid.toString();
+          device.lastSeen = new Date();
+          device.status = Store.st.NEW;
+
+          var id = Store.add(device);
+          console.log(Store.find({"id":id}));
+          //emit an event for this
+          ipc.server.broadcast(EV_DEV_DISCOVERED, {});
+
+        } else {
+          matches[0].address = rinfo.address;
+          matches[0].services = JSON.parse(buff);
+          matches[0].lastSeen = new Date();
+          matches[0].status = Store.st.UPDATED;
+
+          Store.update(matches[0]);
+
+          //emit an event for this
+          ipc.server.broadcast(EV_DEV_UPDATED, {});
+        }
       });
     });
 
   req.on('error',(e) => {
-    log.warn(`Unable to get device descritpor: $(e.message)`);
+    log.w(`Unable to get device descritpor: $(e.message)`);
   });
 
   req.end();
