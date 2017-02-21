@@ -1,0 +1,35 @@
+<div class="container">
+
+ <h2>{{device.name}}</h2>
+ <ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#">Controls</a></li>
+  <li role="presentation"><a href="#">Information</a></li>
+  <li role="presentation"><a href="#">Setings</a></li>
+</ul>
+
+ <section>
+   Some device info here
+
+
+ </section>
+
+ <section>
+   Device config here (locked of course)
+
+ </section>
+
+
+ <section>
+   Device controls go here
+
+   <div ng-repeat ="control in controls">
+
+     <section>
+       <h3>{{control.name}}</h3>
+       <control type=control.type></control>
+     </section>
+
+   </div>
+
+ </section>
+</div>
