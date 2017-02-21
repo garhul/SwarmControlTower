@@ -16,6 +16,10 @@ angular.module('SwarmCT', ['ngRoute','ngResource'])
         templateUrl: 'views/partials/devices.html',
         controller: 'DevicesCtrl'
       })
+      .when('/devices/:id', {
+        templateUrl: 'views/partials/device_detail.html',
+        controller: 'DeviceDetailCtrl'
+      })
       .when('/settings', {
         templateUrl: 'views/partials/settings.html',
         controller: 'SettingsCtrl',

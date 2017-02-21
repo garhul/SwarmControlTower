@@ -38,9 +38,10 @@ ipc.serve(() => {
 
   // get devices
   ipc.server.on(EV_DEV_GET ,(data, socket) => {
+    log.n('requested devices list');
     ipc.server.emit(socket, EV_DEV_GET ,{
       status:200,
-      data: devCtrl.get(data.ids)
+      data: devCtrl.get(data.filter)
     });
   });
 

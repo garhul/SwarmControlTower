@@ -3,8 +3,8 @@ var fs = require('fs');
 
 module.exports = (config, store) => {
 
-  function get(ids) {
-    return store.get(ids);
+  function get(filter) {
+    return store.find(filter);
   }
 
   function add(descriptor) {

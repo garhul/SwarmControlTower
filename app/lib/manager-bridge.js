@@ -10,6 +10,8 @@ var defaults = {
 const EV_DEV_GET = 'devices.get';
 const EV_DEV_ADD = 'devices.add';
 const EV_DEV_REMOVE = 'devices.del';
+const EV_DEV_DISCOVERED = 'devices.discovered';
+const EV_DEV_UPDATED = 'devices.updated';
 
 module.exports = function(cfg) {
  ipc.config = Object.assign(defaults,cfg);
@@ -71,8 +73,8 @@ module.exports = function(cfg) {
      return _sendAndReceive(EV_DEV_ADD, descriptor);
    },
 
-   get: function(ids) {
-     return _sendAndReceive(EV_DEV_GET, {"ids":ids});
+   get: function(filter) {
+     return _sendAndReceive(EV_DEV_GET, filter);
    },
 
    remove: function(ids) {

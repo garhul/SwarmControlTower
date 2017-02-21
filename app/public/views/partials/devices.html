@@ -1,6 +1,6 @@
 <div class="container">
 
- <h3>Detected devices</h3
+ <h3>Detected devices</h3>
   <form class="form-inline">
     <div class="form-group">
       <label class="sr-only" for="filterDevices"></label>
@@ -44,7 +44,7 @@
  </div>
 
  <div class="itemView" ng-show="viewAs == 'ITEM'">
-   <div class="item" ng-repeat="device in devices.data" >
+   <div class="item" ng-repeat="device in devices.data">
      <div class="pull-right">
        <div class="btn-group" role="group">
          <button type="button" class="btn btn-default" title="delete item" ng-click="delete(device.id)">
@@ -52,7 +52,7 @@
          </button>
        </div>
      </div>
-     <h2>{{device.name}}</h2>
+     <h2 ng-click="showDevice(device.id)">{{device.name}}</h2>
      <span class="pull-right">{{device.description}}</span>
    </div>
  </div>

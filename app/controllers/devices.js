@@ -4,7 +4,7 @@ module.exports = function devicesCtrl (bridge) {
   /** return all devices from the devices file **/
   function list(req, res, next) {
     bridge.devices.get(null).then(
-      function(response){
+      function(response){        
         res.send(response);
       },
       function(err) {
