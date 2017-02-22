@@ -1,35 +1,72 @@
-<div class="container">
+<div class="container" id="detailsPanel">
 
  <h2>{{device.name}}</h2>
- <ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="#">Controls</a></li>
-  <li role="presentation"><a href="#">Information</a></li>
-  <li role="presentation"><a href="#">Setings</a></li>
+<p/>
+ <ul class="nav nav-pills">
+  <li role="presentation" ng-class="{active : activeTab === 'control'}"><a href="#" ng-click="switchTab('control')">Control</a></li>
+  <li role="presentation" ng-class="{active : activeTab === 'info'}"><a href="#" ng-click="switchTab('info')">Device info</a></li>
+  <li role="presentation" ng-class="{active : activeTab === 'settings'}"><a href="#" ng-click="switchTab('settings')">Settings</a></li>
 </ul>
 
- <section>
-   Some device info here
+ <!-- device information -->
+ <div ng-show="activeTab === 'info'" class="infoTab">
+   <div class="row info-section">
+     <div class="col-md-6 col-sm-12 main-info">
+       <h4>Device information</h4>
+       <div class="info">
+         <span>ID | chip Id</span> {{device.id}} | {{device.chipId}}
+       </div>
+       <div class="info">
+         <span>Description</span> {{device.description}}
+       </div>
+
+       <div class="info">
+        <span>Status</span> {{device.status || 'NA'}}
+       </div>
+
+       <div class="info">
+         <span>Last seen</span> {{device.lastSeen || 'NA'}}
+       </div>
+     </div>
+     <div class="col-md-6 col-sm-12 network-info">
+       <h4>Network information</h4>
+       <div class="info">
+         <span>IP address</span> {{device.address}}
+       </div>
+       <div class="info">
+         <span>Network name</span> {{device.networkName}}
+       </div>
+     </div>
+   </div>
+
+   <div class="row">
+    <div ng-repeat="service in device.services" class="service-info col-sm-12 col-md-12">
+       <h4>{{service.name || 'unknown service' }}</h4>
+       <div class="info">
+         <span>Description</span> {{service.description}}
+       </div>
+       <div class="info">
+         <span>driver</span> {{service.driver}}
+       </div>
+       <div class="info">
+         <span>enabled</span> {{service.enabled}}
+       </div>
+     </div>
+   </div>
+ </div>
 
 
- </section>
-
- <section>
-   Device config here (locked of course)
-
- </section>
+ <div ng-show="activeTab === 'settings'" class="settingsTab">
+   Device settings to come!
+ </div>
 
 
- <section>
-   Device controls go here
-
+ <div ng-show="activeTab === 'control'" class="controlsTab">
    <div ng-repeat ="control in controls">
-
      <section>
        <h3>{{control.name}}</h3>
        <control type=control.type></control>
      </section>
-
    </div>
-
  </section>
 </div>

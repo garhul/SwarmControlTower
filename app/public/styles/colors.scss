@@ -1,3 +1,14 @@
 $font: Helvetica, sans-serif;
+$background: #21252B;
+$pane-background:#282C34;
+$pane-foreground:#555;
 $foreground : #333;
 $foreground-light :#555;
+$border-pale-purple:#613c83;
+$border-pale-blue:#3c6283;
+$border-pale-green:#3c836f;
+$bg-pill-hover:#282C34;
+$bg-pill-active:lighten($pane-background,10%);
+$fg-pill-hover:#999;
+$fg-pill-active:#fff;
+$fg-pill:#999;

@@ -5,6 +5,7 @@ angular.module('SwarmCT').controller('DeviceDetailCtrl', function($scope, $injec
   var $devStore = $injector.get('DeviceStore');
   var $routeParams = $injector.get('$routeParams');
 
+  $scope.activeTab = false;
   $scope.device = {};
 
   $scope.controls = [
@@ -20,16 +21,26 @@ angular.module('SwarmCT').controller('DeviceDetailCtrl', function($scope, $injec
     }
   ];
 
-  $scope.$on('color.changed',(data)=>{
+  $scope.$on('color.changed',(data) => {
     console.info(data);
   });
 
+  $scope.switchTab = (tab) => {
+    $scope.activeTab = tab;
+    $location.path(`/devices/${$routeParams.id}/${tab}`,false);
+  }
+
   var init = function() {
-    //ask for controls for this device to the device store
-    $devStore.init().then(()=>{
+
+    $scope.activeTab = $routeParams.tab || 'control';
+    console.log($scope.activeTab);
+    $devStore.init().then(() => {
+      //ask for controls for this device to the device store
       $scope.device = $devStore.getDevice($routeParams.id);
       console.log($scope.device);
     });
+
+
 
   }
 

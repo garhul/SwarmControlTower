@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  background-color: #202020;
+  background-color: $background;
   margin-bottom: 44px;
   line-height: 1.57142857;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -106,6 +106,38 @@ footer {
   border-bottom-color: #3f51b5;
   background-color: transparent;
   color: #262626;
+}
+
+.navbar-inverse {
+  background-color: $pane-background;
+  color:$pane-foreground;
+}
+
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+  background-color:$bg-pill-active;
+  color:$fg-pill-active;
+}
+.nav-pills {
+  li a {
+    background:none;
+    color:$fg-pill;
+  }
+
+  li.active a {
+    background-color:$bg-pill-active;
+    color:$fg-pill-active;
+
+    &:hover {
+      background-color: $bg-pill-active;
+      color:$fg-pill-active;
+    }
+  }
+
+  li a:hover {
+    background-color: $bg-pill-hover;
+    color:$fg-pill-hover;
+  }
 }
 
 /* Panels
@@ -327,6 +359,51 @@ textarea {
     min-width:30%;
   }
 
+}
 
 
+#detailsPanel {
+  .infoTab {
+    padding:1em;
+  }
+
+  .info-section {
+    .info {
+      border-left:4px solid $border-pale-blue;
+    }
+
+    margin-bottom:2em;
+  }
+
+  .main-info {
+    .info {
+      border-left:4px solid $border-pale-purple;
+    }
+  }
+
+  .network-info {
+    .info {
+      border-left:4px solid $border-pale-green;
+    }
+  }
+
+  .service-info {
+    .info {
+      border-left:4px solid $border-pale-blue;
+    }
+    margin-bottom:2em;
+  }
+
+  .info {
+    padding : .5em;
+    color: #999;
+    background-color: $pane-background;
+
+    span {
+      font-weight: bold;
+      color:lighten(#999,10%);
+      padding-right: 1em;
+    }
+
+  }
 }

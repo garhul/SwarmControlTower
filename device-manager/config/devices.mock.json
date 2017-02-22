@@ -7,6 +7,7 @@
   "lastSeen":null,
   "location":"Living",
   "description": "mesa con lampara o que se yo",
+  "name":"mesa led",
   "services": [
     {
       "driver":"firefly-rgbstrip",

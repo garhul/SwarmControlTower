@@ -2,8 +2,10 @@
 
 div.control {
   margin:2em;
-  border:1px solid darken($foreground-light, 18%);
-  border-radius:1em;
+  background-color:$pane-background;
+  color:$pane-foreground;
+  border-left:4px solid $border-pale-blue;
+  padding:2em;
 }
 
 
@@ -11,24 +13,24 @@ div.colorwheel {
   min-height:320px;
 
   span.colorwheel {
-    margin: 20px auto;
+    margin: 0px auto;
     position: relative;
-    width: 320px;
-    height: 320px;
+    width: 12em;
+    height: 11em;
 
     span {
       cursor: pointer;
       position: absolute;
       left:200px;
-      top:160px;
-      width: 100px;
-      height: 8px;
+      top:9em;
+      width: 6em;
+      height: .5em;
       -ms-transform-origin: -50px 50%;
       -webkit-transform-origin: -50px 50%;
       -moz-transform-origin: -50px 50%;
       -o-transform-origin: -50px 50%;
       transform-origin: -50px 50%;
-      opacity: 0.25;
+      opacity: 0.5;
 
       &:hover {
         opacity:1;
