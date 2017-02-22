@@ -4,7 +4,7 @@ module.exports = function devicesCtrl (bridge) {
   /** return all devices from the devices file **/
   function list(req, res, next) {
     bridge.devices.get(null).then(
-      function(response){        
+      function(response){
         res.send(response);
       },
       function(err) {
@@ -24,6 +24,26 @@ module.exports = function devicesCtrl (bridge) {
         res.status(500).send({error:true});
       }
     );
+  }
+
+  /** request to send a messeage to a device **/
+  function message(req, res, next) {
+    var msg = {
+      sid:req.body.serviceId,
+      cmd:req.body.command,
+      val:req.body.payload
+    }
+
+    bridge.devices.message( req.body.deviceId, msg).then(
+      (rsp) => {
+        res.status(200).send({data:rsp});
+      },
+      (err) => {
+        console.log("error") + err;
+        res.status(500).send({error:true});
+      }
+    )
+
   }
 
   /** return device descriptor for the required ids**/
@@ -53,5 +73,6 @@ module.exports = function devicesCtrl (bridge) {
     get: get,
     add: add,
     remove:remove,
+    message:message
   }
 }

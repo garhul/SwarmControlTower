@@ -12,10 +12,14 @@ angular
       },
       remove: {
         method: "DELETE",
-        url:'/api/devices/:id'        
+        url:'/api/devices/:id'
       },
       add: {
         method:  "POST",
         url:  '/api/devices'
-      } });
+      },
+      message: {
+        method: "POST",
+        url: '/api/devices/message'
+      }});
   });

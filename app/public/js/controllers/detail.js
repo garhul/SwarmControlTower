@@ -3,6 +3,7 @@
 angular.module('SwarmCT').controller('DeviceDetailCtrl', function($scope, $injector){
   var $location = $injector.get('$location');
   var $devStore = $injector.get('DeviceStore');
+  var $devResource = $injector.get('Devices');
   var $routeParams = $injector.get('$routeParams');
 
   $scope.activeTab = false;
@@ -12,18 +13,23 @@ angular.module('SwarmCT').controller('DeviceDetailCtrl', function($scope, $injec
     {
       name:'Color de tira',
       type:'colorWheel',
-      options: {},
+      serviceId:'F2',
+      config: {
+        serviceId:'BF',
+        cmd:'2'
+      }
     },
     {
       name:'Luces oficina',
       type:'slider',
-      options: {},
+      config: {
+        serviceId:'CB',
+        cmd:0,
+        min:0,
+        max:255
+      },
     }
   ];
-
-  $scope.$on('color.changed',(data) => {
-    console.info(data);
-  });
 
   $scope.switchTab = (tab) => {
     $scope.activeTab = tab;
@@ -40,7 +46,25 @@ angular.module('SwarmCT').controller('DeviceDetailCtrl', function($scope, $injec
       console.log($scope.device);
     });
 
+    //bind controls to services
+    $scope.$on('control.changed',(e,payload) => {
+      console.info(e,payload);
+      var data = {
+        'deviceId':$scope.device.id,
+        'serviceId':payload.serviceId,
+        'command':payload.cmd,
+        'payload':payload.value
+      }
 
+      $devResource.message(data,
+        (res)=>{
+          console.log(res);
+        },
+        (err) => {
+          console.warn(err);
+      });
+
+    });
 
   }
 

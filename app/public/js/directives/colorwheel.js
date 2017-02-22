@@ -4,7 +4,7 @@ angular.module('SwarmCT')
 
   return {
     restrict: 'E',
-    scope: { opts: '=' },
+    scope: { cfg: '=' },
     templateUrl: 'views/partials/controls/colorwheel.html',//'<span class="colorwheel"></span>',
     replace:true,
     link:(scope, element, attrs) => {
@@ -19,8 +19,7 @@ angular.module('SwarmCT')
   			color.style.transform = "rotate(" + i + "deg)";
 
         color.addEventListener('mousedown',(e) => {
-          console.log(e.target.getAttribute('val'));
-          scope.$emit('color.changed',{"val":e.target.getAttribute('val')});
+          scope.$emit('control.changed',{ "value" : e.target.getAttribute('val'), "cmd": scope.cfg.cmd, "serviceId":scope.cfg.serviceId  });
         });
 
         element[0].children[0].appendChild(color);

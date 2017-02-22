@@ -17,6 +17,7 @@ const EV_DEV_ADD = 'devices.add';
 const EV_DEV_REMOVE = 'devices.del';
 const EV_DEV_DISCOVERED = 'devices.discovered';
 const EV_DEV_UPDATED = 'devices.updated';
+const EV_DEV_MESSAGE = 'devices.message';
 
 ipc.config = config.ipc;
 ipc.serve(() => {
@@ -58,6 +59,19 @@ ipc.serve(() => {
   //remove a device
   ipc.server.on(EV_DEV_REMOVE ,(data, socket) => {
     ipc.server.emit(socket, EV_DEV_REMOVE ,devCtrl.remove(data.ids));
+  });
+
+  /** Message a device **/
+  ipc.server.on(EV_DEV_MESSAGE ,(data, socket) => {
+    log.n("Recevied message device request");
+    log.d(JSON.stringify(data));
+
+    var data = devCtrl.message(data.id, data.message);
+    var rsp = {};
+    rsp.data = data;
+    rsp.status = (data === false)? 500: 200;
+
+    ipc.server.emit(socket, EV_DEV_MESSAGE ,rsp);
   });
 });
 

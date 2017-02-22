@@ -1,11 +1,10 @@
 'use strict';
 angular.module('SwarmCT').directive( 'control', function ( $compile ) {
    var controls = {};
-   controls.colorWheel = {'tpl':'<colorWheel/>'};
-   controls.slider = {'tpl':'<slider/>'};
-   
+   controls.colorWheel = {'tpl':'<colorWheel cfg=cfg />'};
+   controls.slider = {'tpl':'<slider cfg=cfg />'};
+
    var linker = ( scope, element, attrs) => {
-    console.log(scope.type);
     element.html(controls[scope.type].tpl);
 
     $compile(element.contents())(scope);
@@ -14,7 +13,7 @@ angular.module('SwarmCT').directive( 'control', function ( $compile ) {
   return {
     restrict: 'E',
     link:linker,
-    scope: { type: '=' },
+    scope: { type: '=', cfg:'='},
     replace:true
   };
 });

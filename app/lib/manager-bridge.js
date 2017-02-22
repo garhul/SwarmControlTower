@@ -12,6 +12,7 @@ const EV_DEV_ADD = 'devices.add';
 const EV_DEV_REMOVE = 'devices.del';
 const EV_DEV_DISCOVERED = 'devices.discovered';
 const EV_DEV_UPDATED = 'devices.updated';
+const EV_DEV_MESSAGE = 'devices.message';
 
 module.exports = function(cfg) {
  ipc.config = Object.assign(defaults,cfg);
@@ -52,9 +53,10 @@ module.exports = function(cfg) {
 
  function _sendAndReceive(ev, payload) {
    return new Promise((resolve, reject)=> {
+     console.log(payload);
      if(!connected)
       return reject(new Error("IPC bridge is not connected"));
-
+      //TODO:: add timeout for waiting responses
       try {
         ipc.of.manager.on(ev, function(data) {
           ipc.of.manager.off(ev,'*');
@@ -79,6 +81,10 @@ module.exports = function(cfg) {
 
    remove: function(ids) {
      return _sendAndReceive(EV_DEV_REMOVE, {"ids":ids});
+   },
+
+   message: function(id, message ) {
+     return _sendAndReceive(EV_DEV_MESSAGE, {id, message});
    }
  };
 

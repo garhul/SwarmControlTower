@@ -1,9 +1,21 @@
+/***********************************
+Author: <Adrian Gesto>
+License: Apache 2
+Version: 0.1
+***************************************/
+
 const dgram = require('dgram');
 const Color = require('color');
 
 //TODO:: standarize methods to a common "driver" interface
 
-module.exports = function(device) {
+
+
+module.exports = function(service) {
+  const CMD_SET_STRIP = 0x1;
+  const CMD_SET_LED = 0x2;
+  const CMD_TEST = 0x3;
+
   function _send(buffer, cb) {
     const udpsvc = dgram.createSocket('udp4');
     //TODO:: handle socket timeouts
@@ -14,9 +26,9 @@ module.exports = function(device) {
       });
     }
 
-    udpsvc.send(buffer, 0, buffer.length, device.port, device['network-name'], function(err) {
+    udpsvc.send(buffer, 0, buffer.length, service.port, service['network-name'], function(err) {
       if (err) {
-        console.error(`ERROR REACHING DEVICE: ${device['human-name']} -  ${err.message}`);
+        console.error(`ERROR REACHING DEVICE: ${service['name']} -  ${err.message}`);
         udpsvc.close();
         cb(new Error("ERROR REACHING DEVICE"), null);
         return;
@@ -34,17 +46,13 @@ module.exports = function(device) {
     * but first prepare the payload accordingly to the
     * requested command
     * we may require a response from the actual device
-    * but that's another story and maybe another architecture
-    * right now this is a master-slave architecture and our devices are the slaves.
     *
     */
-    exec: function(cmd, payload, cb) {
+    exec: function(cmd, payload) {
       var buf = null;
       //prepare payload for the current command
       switch (cmd) {
-        case 'setColorRange': //shoot and forget command
-          //this command receives no response from the device
-          //payload should have start, end, and color as a string
+        case 'setColorRange':
           this.setColorRange(payload, 'RGB', function(err, data) {
             if (err) {
               console.error(e.message);
@@ -102,7 +110,8 @@ module.exports = function(device) {
 
     reboot:function() {},
 
-    off: function() {}
+    off: function() {},
 
+    CMD_SET_STRIP: CMD_SET_STRIP
   }
 }

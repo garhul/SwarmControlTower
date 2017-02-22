@@ -1,7 +1,10 @@
 'use strict';
-var fs = require('fs');
+const fs = require('fs');
+const path  = require('path');
 
 module.exports = (config, store) => {
+  const log = require('../utils/logger')(config);
+  const _ = require('underscore');
 
   function get(filter) {
     return store.find(filter);
@@ -19,11 +22,28 @@ module.exports = (config, store) => {
     return store.remove(ids);
   }
 
+  function message(id, payload) {
+    return new Promise((resolve,reject)=>{
+      try {
+        var services = store.find({id})[0].services;
+        var service = _.where(services,{id:payload.sid})[0];
+
+        var driver = require(path.join(config.paths.drivers, service.driver,'driver'))(service);
+        resolve(driver.exec(payload.cmd, payload.val));
+
+      } catch (e) {
+        console.error(e.message ,e);
+        reject(new Error("Unable to load driver"));
+      }
+    });
+  }
+
   return {
     add:add,
     get:get,
     remove:remove,
     reload:reload,
+    message:message
   };
 
 }

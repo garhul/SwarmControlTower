@@ -33,6 +33,7 @@ module.exports = (bridge) => {
   router.get('/devices', devicesCtrl.list);
   router.post('/devices', devicesCtrl.add);
   router.delete('/devices/:id',devicesCtrl.remove);
+  router.post('/devices/message',devicesCtrl.message);
   //settings api
 
   //just in case

@@ -10,7 +10,8 @@
   "name":"mesa led",
   "services": [
     {
-      "driver":"firefly-rgbstrip",
+      "id":"BF",
+      "driver":"firefly-ledstrip",
       "version":"0.1",
       "channels":64,
       "port":5000,
