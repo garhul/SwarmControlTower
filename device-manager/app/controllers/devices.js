@@ -25,11 +25,12 @@ module.exports = (config, store) => {
   function message(id, payload) {
     return new Promise((resolve,reject)=>{
       try {
-        var services = store.find({id})[0].services;
-        var service = _.where(services,{id:payload.sid})[0];
-
+        var device = store.find({id})[0];
+        var service = _.where(device.services, {id:payload.sid})[0];
+        service.address = device.address;
+        
         var driver = require(path.join(config.paths.drivers, service.driver,'driver'))(service);
-        resolve(driver.exec(payload.cmd, payload.val));
+        resolve(driver.exec(payload));
 
       } catch (e) {
         console.error(e.message ,e);

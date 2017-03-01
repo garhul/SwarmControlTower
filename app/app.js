@@ -16,7 +16,7 @@ var bridge = require('./lib/manager-bridge')(settings.bridge);
 var routes = require('./routes/routes')(bridge);
 
 app.set('settings', settings);
-app.set('port', process.env.PORT || 3000);
+app.set('port', settings.port || 3000);
 app.use(compression());
 // app.use(logger('dev'));
 app.use(bodyParser.json());

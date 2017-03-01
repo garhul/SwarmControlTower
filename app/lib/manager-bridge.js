@@ -52,8 +52,7 @@ module.exports = function(cfg) {
 
 
  function _sendAndReceive(ev, payload) {
-   return new Promise((resolve, reject)=> {
-     console.log(payload);
+   return new Promise((resolve, reject)=> {     
      if(!connected)
       return reject(new Error("IPC bridge is not connected"));
       //TODO:: add timeout for waiting responses

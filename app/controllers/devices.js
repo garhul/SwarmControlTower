@@ -31,7 +31,7 @@ module.exports = function devicesCtrl (bridge) {
     var msg = {
       sid:req.body.serviceId,
       cmd:req.body.command,
-      val:req.body.payload
+      data:req.body.payload
     }
 
     bridge.devices.message( req.body.deviceId, msg).then(
@@ -39,7 +39,7 @@ module.exports = function devicesCtrl (bridge) {
         res.status(200).send({data:rsp});
       },
       (err) => {
-        console.log("error") + err;
+        console.dir(err) ;
         res.status(500).send({error:true});
       }
     )

@@ -66,12 +66,16 @@ ipc.serve(() => {
     log.n("Recevied message device request");
     log.d(JSON.stringify(data));
 
-    var data = devCtrl.message(data.id, data.message);
-    var rsp = {};
-    rsp.data = data;
-    rsp.status = (data === false)? 500: 200;
-
-    ipc.server.emit(socket, EV_DEV_MESSAGE ,rsp);
+    devCtrl.message(data.id, data.message).then(
+      (data) => {
+        var rsp = {};
+        rsp.data = data;
+        rsp.status = 200;
+        ipc.server.emit(socket, EV_DEV_MESSAGE ,rsp);
+      },
+      (err) => {
+        ipc.server.emit(socket, EV_DEV_MESSAGE ,{'status':404,'error':'no response from device'});
+    });
   });
 });
 

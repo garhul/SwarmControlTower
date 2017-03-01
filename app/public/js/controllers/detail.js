@@ -16,7 +16,7 @@ angular.module('SwarmCT').controller('DeviceDetailCtrl', function($scope, $injec
       serviceId:'F2',
       config: {
         serviceId:'BF',
-        cmd:'2'
+        cmd:2
       }
     },
     {
@@ -47,14 +47,17 @@ angular.module('SwarmCT').controller('DeviceDetailCtrl', function($scope, $injec
     });
 
     //bind controls to services
-    $scope.$on('control.changed',(e,payload) => {
-      console.info(e,payload);
+    $scope.$on('control.changed',(e, payload) => {
+
       var data = {
         'deviceId':$scope.device.id,
         'serviceId':payload.serviceId,
         'command':payload.cmd,
         'payload':payload.value
       }
+
+      console.info('sending payload');
+      console.info(data);
 
       $devResource.message(data,
         (res)=>{

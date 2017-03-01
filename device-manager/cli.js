@@ -1,3 +1,5 @@
+//@deprecated
+
 var config = require('./config/config');
 var ipc = require('node-ipc');
 var argv = require('minimist')(process.argv.slice(2));

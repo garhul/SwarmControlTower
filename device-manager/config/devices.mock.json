@@ -1,7 +1,7 @@
 
 {
 "E093bcD1": {
-  "address":"192.168.1.245",
+  "address":"192.168.1.118",
   "networkName":"mesa.local",
   "chipId":35184,
   "lastSeen":null,
@@ -35,6 +35,27 @@
       "enabled":true
     }]
   },
+
+  "E1349FF0": {
+    "address":"192.168.1.119",
+    "networkName":"mesa.local",
+    "chipId":null,
+    "lastSeen":null,
+    "location":"Test table",
+    "description": "test device",
+    "name":"Test device",
+    "services": [
+      {
+        "id":"BF",
+        "driver":"firefly-ledstrip",
+        "version":"0.1",
+        "channels":1,
+        "port":5000,
+        "enabled":true,
+        "name":"led unico",
+        "description":"test de bridge"
+      }]
+    },
 
   "E093bcD3": {
     "device": {
