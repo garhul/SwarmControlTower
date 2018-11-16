@@ -2,10 +2,10 @@
   "name": "hudm",
   "version": "1.0.0",
   "description": "homeUniverse devices manager",
-  "main": "daemon.js",
+  "main": "main.js",
   "scripts": {
     "test": "mocha tests/*.js",
-    "start": "node daemon"
+    "start": "node main"
   },
   "keywords": [
     "iot",

@@ -79,6 +79,12 @@ ipc.serve(() => {
   });
 });
 
+//manage db store / retrieval
+
+
+
+
+
 //Handle announce requests
 sv.on('message',(cid, rinfo) => {
   //this should be an id of new device awaking
